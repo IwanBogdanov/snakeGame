@@ -55,7 +55,7 @@ void draw()
         cout << "#";
     cout << endl;
 
-    sleep(1);
+//    sleep(1);
 }
 void input()
 {
