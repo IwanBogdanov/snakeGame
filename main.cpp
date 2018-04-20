@@ -1,7 +1,10 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10d31ac84f4f9311e3690aa082c9599b788d8d7c
 
 using namespace std;
 
@@ -9,7 +12,6 @@ bool gameOver;
 int const width = 40;
 int const height = 20;
 int x, y, fruitX, fruitY, score = 0;
-
 
 #include <stdio.h>
 #include <termios.h>
@@ -43,6 +45,41 @@ int kbhit(void)
   return 0;
 }
 
+<<<<<<< HEAD
+=======
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
+ 
+int kbhit(void)
+{
+  struct termios oldt, newt;
+  int ch;
+  int oldf;
+ 
+  tcgetattr(STDIN_FILENO, &oldt);
+  newt = oldt;
+  newt.c_lflag &= ~(ICANON | ECHO);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+ 
+  ch = getchar();
+ 
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+  fcntl(STDIN_FILENO, F_SETFL, oldf);
+ 
+  if(ch != EOF)
+  {
+    ungetc(ch, stdin);
+    return 1;
+  }
+ 
+  return 0;
+}
+
+>>>>>>> 10d31ac84f4f9311e3690aa082c9599b788d8d7c
 enum eDirection
 {
     STOP = 0,
@@ -107,7 +144,6 @@ void input()
     if(kbhit())
     switch(getchar())
     {
-
     case 'a':
         dir = LEFT;
         break;
