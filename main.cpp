@@ -1,7 +1,6 @@
 #include <iostream>
 #include <unistd.h>
-#include <ncurses.h>
-
+#include <stdlib.h>
 
 using namespace std;
 
@@ -10,7 +9,6 @@ int const width = 40;
 int const height = 20;
 int x, y, fruitX, fruitY, score = 0;
 
-
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
@@ -42,39 +40,6 @@ int kbhit(void)
  
   return 0;
 }
-
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
-#include <fcntl.h>
- 
-int kbhit(void)
-{
-  struct termios oldt, newt;
-  int ch;
-  int oldf;
- 
-  tcgetattr(STDIN_FILENO, &oldt);
-  newt = oldt;
-  newt.c_lflag &= ~(ICANON | ECHO);
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
- 
-  ch = getchar();
- 
-  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-  fcntl(STDIN_FILENO, F_SETFL, oldf);
- 
-  if(ch != EOF)
-  {
-    ungetc(ch, stdin);
-    return 1;
-  }
- 
-  return 0;
-}
-
 
 enum eDirection
 {
@@ -90,8 +55,8 @@ void start()
 {
     gameOver = false;
     dir = STOP;
-    x = width / 2;
-    y = height / 2;
+    x = width / 2 - 1;
+    y = height / 2 - 1;
     fruitX = rand() % width;
     fruitY = rand() % height;
 }
@@ -111,10 +76,16 @@ void draw()
                 cout << "#";
 
             if(i == y && j == x)
+            {
+                j++;
                 cout << "0";
+            }
 
             else if(i == fruitY && j == fruitX)
+            {
+                j++;
                 cout << "F";
+            }
 
             cout << " ";
         }
@@ -134,7 +105,6 @@ void input()
     if(kbhit())
     switch(getchar())
     {
-
     case 'a':
         dir = LEFT;
         break;
