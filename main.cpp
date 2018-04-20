@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
-#include <stdlib.h>
+#include <ncurses.h>
+
 
 using namespace std;
 
@@ -9,6 +10,7 @@ int const width = 40;
 int const height = 20;
 int x, y, fruitX, fruitY, score = 0;
 
+
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
@@ -72,6 +74,7 @@ int kbhit(void)
  
   return 0;
 }
+
 
 enum eDirection
 {
@@ -131,6 +134,7 @@ void input()
     if(kbhit())
     switch(getchar())
     {
+
     case 'a':
         dir = LEFT;
         break;
