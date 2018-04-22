@@ -113,8 +113,8 @@ void draw()
     cout << endl;
 
     cout << "Score: " << score << endl;
+        sleep(1);
 
-       sleep(1);
 }
 void input()
 {
@@ -175,11 +175,12 @@ void logic()
 //        gameOver = true;
     if(x >= width -1)
         x = 0;
-    else if(x < width - 1)
+    else if(x < 0)
         x = width - 2;
+
     if(y >= height)
         y = 0;
-    else if(y < height)
+    else if(y < 0)
         y = height - 1;
 
     for(int i = 0; i < nTail; i++)
