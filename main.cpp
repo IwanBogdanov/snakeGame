@@ -8,6 +8,9 @@ bool gameOver;
 int const width = 40;
 int const height = 20;
 int x, y, fruitX, fruitY, score = 0;
+int tailX[100];
+int tailY[100];
+int nTail;
 
 #include <stdio.h>
 #include <termios.h>
@@ -77,17 +80,30 @@ void draw()
 
             if(i == y && j == x)
             {
-                j++;
+
                 cout << "0";
             }
 
             else if(i == fruitY && j == fruitX)
             {
-                j++;
+
                 cout << "F";
             }
+            else
+            {
+                bool print = false;
+                for(int k = 0; k < nTail; k++)
+                {
+                    if(tailX[k] == j && tailY[k] == i)
+                    {
+                        print = true;
+                        cout << "o";
 
-            cout << " ";
+                    }
+                }
+                if (!print)
+                cout << " ";
+            }
         }
         cout << endl;
     }
@@ -124,6 +140,20 @@ void input()
 }
 void logic()
 {
+    int prevX = tailX[0];
+    int prevY = tailY[0];
+    int prevX2, prevY2;
+    tailX[0] = x;
+    tailY[0] = y;
+    for(int i = 1; i < nTail; i++)
+    {
+        prevX2 = tailX[i];
+        prevY2 = tailY[i];
+        tailX[i] = prevX;
+        tailY[i] = prevY;
+        prevX = prevX2;
+        prevY = prevY2;
+    }
     switch(dir)
     {
 
@@ -148,6 +178,7 @@ void logic()
         score++;
     fruitX = rand() % width;
     fruitY = rand() % height;
+    nTail++;
 
     }
 }
