@@ -3,4 +3,9 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+HEADERS += \
+    SnakeGame.h
+
+SOURCES += \
+    main.cpp \
+    SnakeGame.cpp
