@@ -17,17 +17,13 @@ SnakeGame::SnakeGame() :
     gameOver(false),
     width(40),
     height(20),
-    x(0),
-    y(0),
-    fruitX(0),
-    fruitY(0),
+    x(width / 2 - 1),
+    y(height / 2 - 1),
+    fruitX(rand() % width),
+    fruitY(rand() % height),
     score(0),
     nTail(0)
 {
-    x = width / 2 - 1;
-    y = height / 2 - 1;
-    fruitX = rand() % width;
-    fruitY = rand() % height;
 }
 
 
